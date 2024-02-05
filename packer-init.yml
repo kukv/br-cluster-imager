@@ -1,0 +1,10 @@
+# もしPackerプラグインを使うようであれば、イメージビルド前に実行する必要があるのでとりあえず置いておく
+services:
+  packer-init:
+    image: mkaczanowski/packer-builder-arm:latest
+    volumes:
+      - /dev:/dev
+      - ${PWD}:/build
+    privileged: true
+    command: >
+      init -upgrade packer/build.pkr.hcl

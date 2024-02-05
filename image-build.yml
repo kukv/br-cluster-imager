@@ -1,0 +1,13 @@
+services:
+  image-build:
+    image: mkaczanowski/packer-builder-arm:latest
+    volumes:
+      - /dev:/dev
+      - ${PWD}/cloud-init/generated:/build/cloud-init
+      - ${PWD}/packer:/build/packer
+      - ${PWD}/build/image:/build/generated
+      - ${PWD}/build/.packer_cache:/build/.packer_cache
+      - ${PWD}/build/.packer_plugins:/build/.packer_plugins
+    privileged: true
+    command: >
+      build --var-file=packer/${MACHINE_NAME}.pkrvars.hcl packer/
