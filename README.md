@@ -1,27 +1,25 @@
 # br-cluster-imager
 
-お家クラスタの構築に関する資材を集約したリポジトリ  
-基本ここを辿ればどういう構成になってるのかがわかるようになってるはず。。(たぶん)
+Raspberry pi OSのイメージ情報を管理するリポジトリ
 
 ## ディレクトリ構成
 ```
 .
-├── build/                      #ここにRasberryPIに焼く用のイメージが生成される
+├── build/                      #Packerで生成されるrasberry pi OSのイメージが格納されるディレクトリ
 ├── cloud-init/                 #cloud-initのファイル管理を行うディレクトリ
-|                               # https://github.com/kukv/br-cluster-cloud-init
-├── docs/                       #ドキュメント類を管理するディレクトリ
+│                               # https://github.com/kukv/br-cluster-cloud-init
+├── cluster-list                #クラスタ一覧
+├── gateway-list                #ゲートウェイ一覧
+├── image-build.sh              #自動生成実行シェル
+├── image-build.yml             #rasberry pi OSのイメージを生成するためのdocker compose
 ├── packer/                     #イメージ生成のための定義を管理するディレクトリ
-├── cluster-list                #クラスター用サーバー一覧
-├── gateway-list                #ゲートウェイ用サーバー一覧
-├── image-build.sh              #実行シェル
-└── image-build.yml             #RasberryPIに焼く用のイメージを生成するdocker-compose
+└── packer-init.yml             # Packerのプラグインをセットアップするためのdocker compose
+
 ```
 
-## システム構成図
-
-![システム構成図](docs/diagrams/system-configuration.svg)
-
 ## イメージの生成方法
+
+cloud-initファイル生成のシェルも内部で叩くようになっているので、基本的にはこのシェルだけを叩けば良い
 
 ```
 ./image-build.sh
