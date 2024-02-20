@@ -30,6 +30,14 @@ done < ./gateway-list
 
 while read -r server; do
     echo "===================================================================================================="
+    echo "= start build external service image a ${server}."
+    echo "===================================================================================================="
+    export MACHINE_NAME="${server}"
+    docker compose -f image-build.yml up
+done < ./external-service-list
+
+while read -r server; do
+    echo "===================================================================================================="
     echo "= start build cluster image a ${server}."
     echo "===================================================================================================="
     export MACHINE_NAME="${server}"
